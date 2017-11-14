@@ -37,6 +37,67 @@ data = [['Producto1', 10, 15, 21],
 		['Producto8', 1, 2, 'NR'], 
 		['Producto12', 'NR', 2, 'NR']]
 
+# -------------------------------------------------------------------------------------------------
+# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+# -------------------------------------------------------------------------------------------------
+# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+# -------------------------------------------------------------------------------------------------
+# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+# -------------------------------------------------------------------------------------------------
+
+# Opción 1, a
+def list_product(array)
+	puts '--+--+--+--+--+-- P r o d u c t o s --+----+--+--+--'
+	array.each do |producto, exist1, exist2, exist3|
+		puts "producto: #{producto}, Tienda 1: #{exist1}, Tienda 2: #{exist2}, Tienda 3: #{exist3}"
+	end
+	puts '--+--+--+--+-- FIN P r o d u c t o s --+----+--+--+-'
+end
+
+# Opción 1, b
+def list_product_tienda(array, tienda)
+	puts '--+--+--+--+--+-- P r o d u c t o s --+----+--+--+--'
+	array.each do |producto, exist1, exist2, exist3|
+		case tienda
+		when 1
+			puts "producto: #{producto}, Tienda 1: #{exist1}"
+		when 2
+			puts "producto: #{producto}, Tienda 2: #{exist2}"
+		when 3
+			puts "producto: #{producto}, Tienda 3: #{exist3}"
+		else
+			puts "La tienda no existe"
+		end
+	end
+	puts '--+--+--+--+-- FIN P r o d u c t o s --+----+--+--+-'
+end
+
+# Opción 1, c
+def list_product_producto(array, producto)
+	puts '--+--+--+--+--+-- P r o d u c t o s --+----+--+--+--'
+
+	arr = array.reject { |produ, exist1, exist2, exist3| produ != producto }
+	arr.each do |producto, exist1, exist2, exist3|
+		puts "producto: #{producto}, Tienda 1: #{exist1}, Tienda 2: #{exist2}, Tienda 3: #{exist3}"
+	end
+	puts '--+--+--+--+-- FIN P r o d u c t o s --+----+--+--+-'
+end
+# -------------------------------------------------------------------------------------------------
+# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+# -------------------------------------------------------------------------------------------------
+# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+# Opción 2
+def method_name
+	
+end
+
+
+
+# -------------------------------------------------------------------------------------------------
+# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+# -------------------------------------------------------------------------------------------------
+
 def menu()
 	puts '--+--+--+--+--+--+-- M E N U --+--+----+--+--+--+'
 	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
@@ -66,29 +127,44 @@ def option_of_menu()
 	opt = gets.chomp
 end
 
-def pantalla_submenu()
+def option_tienda()
+	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
+	puts 'Ingrese una Tienda: '
+	opt = gets.chomp
+end
+
+def option_producto()
+	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
+	puts 'Ingrese un producto: '
+	opt = gets.chomp
+end
+
+def pantalla_submenu(arr)
 	opt = ''
 	while opt == ''
+		menu_sub()
 		opt = option_of_menu().to_s
 
 		case opt
 		when 'a'
-			print 1
+			list_product(arr)
+			opt = ''
 		when 'b'
-			print 2
+			list_product_tienda(arr, option_tienda().to_i)
+			opt = ''
 		when 'c'
-			print 3
+			list_product_producto(arr, option_producto().to_s)
+			opt = ''
 		when 'd'
-			print 4
-		when 'e'
-			pantalla_menu()
+			opt = 0 
+			pantalla_menu(arr)
 		else
 			opt = ''
 		end
 	end
 end
 
-def pantalla_menu()
+def pantalla_menu(arr)
 	opt = 0
 	while opt == 0
 		menu()
@@ -96,8 +172,8 @@ def pantalla_menu()
 
 		case opt
 			when 1
-				menu_sub()
-				pantalla_submenu()
+				pantalla_submenu(arr)
+				opt = 1
 			when 2
 				print 2
 				opt = 0
@@ -118,65 +194,10 @@ def pantalla_menu()
 	end
 end
 
-pantalla_menu()
+pantalla_menu(data)
 
 
-# -------------------------------------------------------------------------------------------------
-# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-# -------------------------------------------------------------------------------------------------
-# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-# -------------------------------------------------------------------------------------------------
-# +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-# -------------------------------------------------------------------------------------------------
 
-
-def list_product(array)
-	puts '--+--+--+--+--+-- P r o d u c t o s --+----+--+--+--'
-	array.each do |producto, exist1, exist2, exist3|
-		puts "producto: #{producto}, Tienda 1: #{exist1}, Tienda 2: #{exist2}, Tienda 3: #{exist3}"
-	end
-	puts '--+--+--+--+-- FIN P r o d u c t o s --+----+--+--+-'
-end
-
-def list_product_tienda(array, tienda)
-	puts '--+--+--+--+--+-- P r o d u c t o s --+----+--+--+--'
-	array.each do |producto, exist1, exist2, exist3|
-		case tienda
-		when 1
-			puts "producto: #{producto}, Tienda 1: #{exist1}"
-		when 2
-			puts "producto: #{producto}, Tienda 2: #{exist2}"
-		when 3
-			puts "producto: #{producto}, Tienda 3: #{exist3}"
-		else
-			puts "La tienda no existe"
-		end
-	end
-	puts '--+--+--+--+-- FIN P r o d u c t o s --+----+--+--+-'
-end
-
-def list_product_producto(array, producto)
-	puts '--+--+--+--+--+-- P r o d u c t o s --+----+--+--+--'
-
-	arr = array.reject { |produ, exist1, exist2, exist3| produ != producto }
-	arr.each do |producto, exist1, exist2, exist3|
-		puts "producto: #{producto}, Tienda 1: #{exist1}, Tienda 2: #{exist2}, Tienda 3: #{exist3}"
-	end
-	puts '--+--+--+--+-- FIN P r o d u c t o s --+----+--+--+-'
-end
-
-
-def option_of_tienda()
-	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
-	puts 'Ingrese una tienda: '
-	opt = gets.chomp.to_i
-end
-
-def option_of_productos()
-	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
-	puts 'Ingrese una producto: '
-	opt = gets.chomp.to_s
-end
 
 
 
