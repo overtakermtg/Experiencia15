@@ -121,21 +121,9 @@ def menu_sub()
 	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
 end
 
-def option_of_menu()
+def menu_options(texto)
 	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
-	puts 'Ingrese una opción del menu: '
-	opt = gets.chomp
-end
-
-def option_tienda()
-	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
-	puts 'Ingrese una Tienda: '
-	opt = gets.chomp
-end
-
-def option_producto()
-	puts '--+--+--+--+--+--+--+--+--+--+--+--+----+--+--+--'
-	puts 'Ingrese un producto: '
+	puts "Ingrese un#{texto}:"
 	opt = gets.chomp
 end
 
@@ -143,17 +131,17 @@ def pantalla_submenu(arr)
 	opt = ''
 	while opt == ''
 		menu_sub()
-		opt = option_of_menu().to_s
+		opt = menu_options('a opción del SUB menu').to_s
 
 		case opt
 		when 'a'
 			list_product(arr)
 			opt = ''
 		when 'b'
-			list_product_tienda(arr, option_tienda().to_i)
+			list_product_tienda(arr, menu_options('a Tienda').to_i)
 			opt = ''
 		when 'c'
-			list_product_producto(arr, option_producto().to_s)
+			list_product_producto(arr, menu_options(' Producto').to_s)
 			opt = ''
 		when 'd'
 			opt = 0 
@@ -168,7 +156,7 @@ def pantalla_menu(arr)
 	opt = 0
 	while opt == 0
 		menu()
-		opt = option_of_menu().to_i
+		opt = menu_options('a opción del menu').to_i
 
 		case opt
 			when 1
